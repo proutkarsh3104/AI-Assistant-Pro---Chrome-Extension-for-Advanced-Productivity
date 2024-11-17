@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Assistant Pro - Google AI Hackathon</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #4285f4;
+      --secondary-color: #34a853;
+      --accent-color: #ea4335;
+      --background-color: #fafafa;
+      --card-bg: #ffffff;
+      --text-color: #202124;
+      --border-radius: 12px;
+      --gradient-bg: linear-gradient(135deg, #4285f4, #0f9d58);
+      --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+    body {
+        width: 600px;
+        padding: 24px;
+        font-family: 'Google Sans', Arial, sans-serif;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        margin: 0;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+    /* Animated background effect */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 50%, rgba(66, 133, 244, 0.1) 0%, transparent 50%);
+      animation: pulse 4s infinite;
+      z-index: -1;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.5); opacity: 0.2; }
+      100% { transform: scale(1); opacity: 0.5; }
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 24px;
+      padding: 16px;
+      background: var(--gradient-bg);
+      border-radius: var(--border-radius);
+      color: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .header h2 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .header-icon {
+      margin-right: 16px;
+      font-size: 28px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .mode-selector {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding: 4px;
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .mode-btn {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--text-color);
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .mode-btn.active {
+      background: var(--gradient-bg);
+      color: white;
+      transform: scale(1.02);
+    }
+
+    .mode-btn i {
+      margin-right: 8px;
+      font-size: 16px;
+    }
+
+    .input-container {
+      position: relative;
+      margin-bottom: 20px;
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      padding: 4px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 16px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: var(--border-radius);
+      font-size: 15px;
+      resize: vertical;
+      transition: all 0.3s;
+      box-sizing: border-box;
+      background: transparent;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+    }
+
+    .settings-panel {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .settings-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .settings-label {
+      flex: 1;
+      font-size: 14px;
+      color: var(--text-color);
+    }
+
+    .settings-control {
+      width: 120px;
+    }
+
+    input[type="range"] {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      width: 100%;
+      height: 4px;
+      background: #e0e0e0;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      width: 20px;
+      height: 20px;
+      background: var(--primary-color);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      width: 20px;
+      height: 20px;
+      background: var(--primary-color);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: none;
+    }
+
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.1);
+    }
+
+    select {
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      background: white;
+      cursor: pointer;
+    }
+
+    button#generateBtn {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: var(--border-radius);
+      background: var(--gradient-bg);
+      color: white;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+    }
+
+    button#generateBtn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(66, 133, 244, 0.4);
+    }
+
+    .loading {
+      display: none;
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s linear infinite;
+    }
+
+    #result {
+      margin-top: 24px;
+      padding: 20px;
+      padding-top: 48px; /* Increased top padding to accommodate the copy button */
+      border-radius: var(--border-radius);
+      background: var(--card-bg);
+      min-height: 50px;
+      max-height: 300px;
+      overflow-y: auto;
+      font-size: 15px;
+      line-height: 1.6;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      position: relative;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 6px 12px;
+      background: white;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--text-color);
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      z-index: 10;
+    }
+
+    .copy-btn:hover {
+      background: #f8f9fa;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    #result::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 40px;
+      background: #f8f9fa;
+      border-top-left-radius: var(--border-radius);
+      border-top-right-radius: var(--border-radius);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .success-message {
+      color: var(--secondary-color);
+      background-color: rgba(52, 168, 83, 0.1);
+      padding: 12px;
+      border-radius: var(--border-radius);
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .error {
+      color: var(--accent-color);
+      background-color: rgba(234, 67, 53, 0.1);
+      padding: 12px;
+      border-radius: var(--border-radius);
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mode-specific-controls {
+      margin: 16px 0;
+      padding: 12px;
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+    }
+
+    .language-selector, .language-tag, .brainstorm-options {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    select, input[type="number"] {
+      padding: 8px 12px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 6px;
+      background: white;
+      font-size: 14px;
+    }
+
+    /* History panel styles */
+    #history-panel {
+      margin-top: 24px;
+      padding: 16px;
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+    }
+
+    .history-item {
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .history-item:hover {
+      background: rgba(66, 133, 244, 0.1);
+    }
+
+    .history-item .mode-tag {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-right: 8px;
+      background: var(--gradient-bg);
+      color: white;
+    }
+
+    .loading-spinner {
+    display: inline-block;
+    }
+
+    .spinner {
+        width: 20px;
+        height: 20px;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+   
+  </style>
+</head>
+<body>
+  <div class="header">
+    <i class="fas fa-brain header-icon"></i>
+    <h2>AI Assistant Pro</h2>
+  </div>
+
+  <div class="mode-selector">
+    <button class="mode-btn active" data-mode="generate">
+      <i class="fas fa-wand-magic-sparkles"></i> Generate
+    </button>
+    <button class="mode-btn" data-mode="translate">
+      <i class="fas fa-language"></i> Translate
+    </button>
+    <button class="mode-btn" data-mode="explain">
+      <i class="fas fa-code"></i> Explain Code
+    </button>
+    <button class="mode-btn" data-mode="brainstorm">
+      <i class="fas fa-lightbulb"></i> Brainstorm
+    </button>
+    <button class="mode-btn" data-mode="history">
+      <i class="fas fa-history"></i> History
+    </button>
+  </div>
+
+  <div class="mode-specific-controls">
+    <!-- Translate Mode Controls -->
+    <div class="controls translate-controls" style="display: none;">
+      <div class="language-selector">
+        <select id="fromLanguage">
+          <option value="auto">Detect Language</option>
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+          <option value="de">German</option>
+          <option value="it">Italian</option>
+          <option value="pt">Portuguese</option>
+          <option value="ru">Russian</option>
+          <option value="zh">Chinese</option>
+          <option value="ja">Japanese</option>
+          <option value="ko">Korean</option>
+        </select>
+        <i class="fas fa-arrow-right"></i>
+        <select id="toLanguage">
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+          <option value="de">German</option>
+          <option value="it">Italian</option>
+          <option value="pt">Portuguese</option>
+          <option value="ru">Russian</option>
+          <option value="zh">Chinese</option>
+          <option value="ja">Japanese</option>
+          <option value="ko">Korean</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Code Explanation Controls -->
+    <div class="controls explain-controls" style="display: none;">
+      <div class="language-tag">
+        <select id="codeLanguage">
+          <option value="auto">Detect Language</option>
+          <option value="python">Python</option>
+          <option value="javascript">JavaScript</option>
+          <option value="java">Java</option>
+          <option value="cpp">C++</option>
+          <option value="csharp">C#</option>
+          <option value="php">PHP</option>
+          <option value="ruby">Ruby</option>
+          <option value="swift">Swift</option>
+          <option value="golang">Go</option>
+        </select>
+        <select id="explanationDetail">
+          <option value="basic">Basic</option>
+          <option value="detailed">Detailed</option>
+          <option value="technical">Technical</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Brainstorm Controls -->
+    <div class="controls brainstorm-controls" style="display: none;">
+      <div class="brainstorm-options">
+        <select id="brainstormType">
+          <option value="ideas">Generate Ideas</option>
+          <option value="solutions">Problem Solving</option>
+          <option value="features">Feature Suggestions</option>
+          <option value="improvements">Improvements</option>
+        </select>
+        <input type="number" id="ideaCount" min="3" max="10" value="5" placeholder="Number of ideas">
+      </div>
+    </div>
+  </div>
+
+  <div class="input-container">
+    <textarea id="inputText" placeholder="Enter your prompt here..."></textarea>
+    <span class="char-count">0/5000</span>
+  </div>
+
+  <div class="settings-panel">
+    <div class="settings-row">
+      <span class="settings-label">AI Creativity Level</span>
+      <input type="range" id="temperatureSlider" class="settings-control" min="0" max="100" value="70">
+    </div>
+    <div class="settings-row">
+      <span class="settings-label">Response Length</span>
+      <select id="lengthSelect" class="settings-control">
+        <option value="short">Concise</option>
+        <option value="medium" selected>Balanced</option>
+        <option value="long">Detailed</option>
+      </select>
+    </div>
+  </div>
+
+  <button id="generateBtn">
+    <i class="fas fa-robot"></i>
+    <span class="btn-text">Generate Response</span>
+  </button>
+
+  <div id="result"></div>
+
+  <div id="history-panel" style="display: none;">
+    <h3>Recent Interactions</h3>
+    <div id="history-list"></div>
+  </div>
+  <script src="popup.js"></script>
+
+</body>
+</html>
