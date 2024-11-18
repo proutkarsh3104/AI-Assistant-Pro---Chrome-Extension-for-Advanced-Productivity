@@ -113,7 +113,9 @@ This project is open-source and available under the [MIT License](LICENSE). See 
 - **Settings Panel**: Add a dedicated settings panel for user preferences.
 
 ## Screenshots
-(Add screenshots here if you have any)
+<img src="https://raw.githubusercontent.com/proutkarsh3104/AI-Assistant-Pro---Chrome-Extension-for-Advanced-Productivity/main/screenshots/Desktop%20Screenshot%202024.11.18%20-%2001.47.10.58.png" alt="Desktop Screenshot" width="600"><img src="https://github.com/proutkarsh3104/AI-Assistant-Pro---Chrome-Extension-for-Advanced-Productivity/blob/main/screenshots/Desktop%20Screenshot%202024.11.18%20-%2001.47.40.08.png" width="600">
+
+For the remaining Screenshots you can go to the Screenshot folder and the Screenshot folder.
 
 ## Contact
 For any inquiries or support, please open an issue on GitHub.
