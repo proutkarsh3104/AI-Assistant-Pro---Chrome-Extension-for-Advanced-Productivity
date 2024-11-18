@@ -102,7 +102,8 @@ The extension requires the following permissions:
 Feel free to fork this repository and submit pull requests for any improvements or new features. Contributions are welcome!
 
 ## License
-This project is open-source and available under the MIT License. See the LICENSE file for more details.
+This project is open-source and available under the [MIT License](LICENSE). See the [LICENSE](LICENSE) file for more details.
+
 
 ## Future Enhancements
 - **Additional Modes**: Implement new AI-powered features like summarization or sentiment analysis.
