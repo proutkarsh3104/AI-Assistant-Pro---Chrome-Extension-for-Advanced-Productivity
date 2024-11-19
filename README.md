@@ -114,13 +114,16 @@ This project is open-source and available under the [MIT License](LICENSE). See 
 
 ## Screenshots
 <img src="https://raw.githubusercontent.com/proutkarsh3104/AI-Assistant-Pro---Chrome-Extension-for-Advanced-Productivity/main/screenshots/Desktop%20Screenshot%202024.11.18%20-%2001.47.10.58.png" alt="Desktop Screenshot" width="600"><img src="https://github.com/proutkarsh3104/AI-Assistant-Pro---Chrome-Extension-for-Advanced-Productivity/blob/main/screenshots/Desktop%20Screenshot%202024.11.18%20-%2001.47.40.08.png" width="600">
+
+
+
 For the remaining Screenshots you can go to the Screenshot folder and the Screenshot folder.
 
 ## Video
-[![AI Assistant Pro - Chrome Extension Demo | Multi-Mode AI Assistant for Google AI Hackathon](https://raw.githubusercontent.com/proutkarsh3104/AI-Assistant-Pro---Chrome-Extension-for-Advanced-Productivity/main/screenshots/Desktop%20Screenshot%202024.11.18%20-%2001.47.10.58.png)]([https://www.youtube.com/watch?v=YourVideoID](https://www.youtube.com/watch?v=6d98Z8W-3LI))
+[![Watch the video](https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg)]([https://www.youtube.com/watch?v=dQw4w9WgXcQ](https://www.youtube.com/watch?v=6d98Z8W-3LI))
 
 
-For the remaining Screenshots you can go to the Screenshot folder and the Screenshot folder.
+
 
 ## Contact
 For any inquiries or support, please open an issue on GitHub.
