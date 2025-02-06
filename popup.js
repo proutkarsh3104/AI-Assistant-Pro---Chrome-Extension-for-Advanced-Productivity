@@ -1,5 +1,5 @@
 // Constants
-const API_KEY = 'YOUR-API-KEY';
+const API_KEY = 'AIzaSyClTaLvPgHpCxCeKDfY4CE1rQG-oEPAMLg';
 const MAX_CHARS = 5000;
 
 // Wait for DOM to be fully loaded
